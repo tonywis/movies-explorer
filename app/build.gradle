@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def apisKeysPropertiesFile = rootProject.file("keys_apis/keys_apis.properties")
+def apisKeysProperties = new Properties()
+apisKeysProperties.load(new FileInputStream(apisKeysPropertiesFile))
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -15,7 +19,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "API_TMDB", apisKeysProperties['apiTMDB']
+        }
         release {
+            buildConfigField "String", "API_TMDB", apisKeysProperties['apiTMDB']
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -30,4 +38,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.android.volley:volley:1.1.0'
+    compile 'com.google.code.gson:gson:2.8.2'
 }
