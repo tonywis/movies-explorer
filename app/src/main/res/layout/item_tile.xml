@@ -2,33 +2,37 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="272dp"
+    android:layout_margin="2dp">
 
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#E0E0E0">
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/item_tile_poster"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:adjustViewBounds="false"
-            android:src="@drawable/poster"/>
+            android:adjustViewBounds="false"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="68dp">
-            <TextView
+            android:layout_height="68dp"
+            android:background="#424242">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/item_tile_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp"
                 android:maxLines="2"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="Le Labyrinthe : Le Remède mortel"/>
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
 
-    </LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Movie Explorer</string>
     <string name="not_connect">Internet connexion missing.</string>
+    <string name="error_datas">Error datas</string>
 </resources>

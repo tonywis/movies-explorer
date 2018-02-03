@@ -17,13 +17,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "API_KEY_TMDB", apisKeysProperties['apiTMDB']
+        buildConfigField "String", "URL_TMDB_API", "\"https://api.themoviedb.org/3\""
+        buildConfigField "String", "URL_TMDB_IMAGES", "\"https://image.tmdb.org/t/p/w500\""
     }
     buildTypes {
-        debug {
-            buildConfigField "String", "API_TMDB", apisKeysProperties['apiTMDB']
-        }
         release {
-            buildConfigField "String", "API_TMDB", apisKeysProperties['apiTMDB']
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -32,8 +31,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -41,4 +41,5 @@ dependencies {
     compile 'com.android.volley:volley:1.1.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

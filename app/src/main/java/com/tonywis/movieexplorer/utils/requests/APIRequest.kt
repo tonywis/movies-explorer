@@ -8,18 +8,14 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 
-import com.android.volley.NetworkResponse
-import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.Response.Listener
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.tonywis.movieexplorer.BuildConfig
 import com.tonywis.movieexplorer.R
-import com.tonywis.movieexplorer.models.Answer
 
 import java.io.UnsupportedEncodingException
 import java.lang.reflect.Type
@@ -30,11 +26,10 @@ import java.util.HashMap
 class APIRequest<TypeData>(private val context: Context, private val resultClass: Type, private val taskComplete: TaskComplete<TypeData>?) {
     private val params: HashMap<String, String> = HashMap()
     private var method: Int = 0
-    private var answer: Answer<TypeData>? = null
+    private var answer: TypeData? = null
 
     init {
         method = -99999
-        answer = Answer()
     }
 
     fun addParam(key: String, value: String) {
@@ -48,10 +43,12 @@ class APIRequest<TypeData>(private val context: Context, private val resultClass
     fun execute(url: String) {
         if (method == -99999) {
             Log.e("Schedule Rep APIRequest", "Method request missing ! (url: $url)")
+            taskComplete?.run()
             return
         }
         if (!Network.isConnected(context)) {
             Toast.makeText(context, R.string.not_connect, Toast.LENGTH_SHORT).show()
+            taskComplete?.run()
             return
         }
         if (BuildConfig.DEBUG)
@@ -61,7 +58,7 @@ class APIRequest<TypeData>(private val context: Context, private val resultClass
             val gson = Gson()
             if (BuildConfig.DEBUG)
                 showLogResponse(url, response)
-            answer = gson.fromJson<Answer<TypeData>>(response, resultClass)
+            answer = gson.fromJson(response, resultClass)
             if (taskComplete != null) {
                 taskComplete.result = answer
                 taskComplete.run()
