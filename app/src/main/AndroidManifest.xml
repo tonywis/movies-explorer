@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.BrandedLaunch">
         <activity android:name=".ui.MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,9 @@
         </activity>
         <activity android:name=".ui.MovieDetailsActivity"
             android:theme="@style/AppTheme.MovieDetails"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize">
         </activity>
     </application>
 
