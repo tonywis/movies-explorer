@@ -15,8 +15,12 @@ import java.util.TimeZone;
  */
 public class FormatHelper {
 
-    public static String formatCalDateFormatToString(Context c, Calendar cal) {
-        SimpleDateFormat dateFormat = (SimpleDateFormat) DateFormat.getDateFormat(c);
+    public static String formatCalDateFormatToString(Context c, Calendar cal, boolean international) {
+        SimpleDateFormat dateFormat;
+        if (international)
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd", c.getResources().getConfiguration().locale);
+        else
+            dateFormat = (SimpleDateFormat) DateFormat.getDateFormat(c);
         String datePattern = dateFormat.toPattern();
         //Log.d("Schedule Date Pattern", datePattern);
         SimpleDateFormat format = new SimpleDateFormat(datePattern, c.getResources().getConfiguration().locale);
@@ -35,4 +39,5 @@ public class FormatHelper {
         }
         return cal;
     }
+
 }

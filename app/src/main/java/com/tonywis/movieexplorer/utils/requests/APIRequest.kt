@@ -28,6 +28,8 @@ class APIRequest<TypeData>(private val context: Context, private val resultClass
     private var method: Int = 0
     private var answer: TypeData? = null
 
+    private var showMissingInternetConnexion = true
+
     init {
         method = -99999
     }
@@ -40,6 +42,10 @@ class APIRequest<TypeData>(private val context: Context, private val resultClass
         method = meth
     }
 
+    fun setShowMissingInternetConnexion(showMissingInternetCo : Boolean) {
+        showMissingInternetConnexion = showMissingInternetCo
+    }
+
     fun execute(url: String) {
         if (method == -99999) {
             Log.e("Schedule Rep APIRequest", "Method request missing ! (url: $url)")
@@ -47,7 +53,8 @@ class APIRequest<TypeData>(private val context: Context, private val resultClass
             return
         }
         if (!Network.isConnected(context)) {
-            Toast.makeText(context, R.string.not_connect, Toast.LENGTH_SHORT).show()
+            if (showMissingInternetConnexion)
+                Toast.makeText(context, R.string.not_connect, Toast.LENGTH_SHORT).show()
             taskComplete?.run()
             return
         }

@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="gone"
-                android:text="@string/error_datas"/>
+                android:text="@string/no_datas"/>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
