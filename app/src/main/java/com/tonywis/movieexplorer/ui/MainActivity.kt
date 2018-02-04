@@ -3,6 +3,7 @@ package com.tonywis.movieexplorer.ui
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity(), GridListRecyclerAdapter.ItemClickListe
         var numberColumns : Int = Utility.calculateNoOfColumns(applicationContext)
 
         recyclerView.layoutManager = GridLayoutManager(applicationContext, numberColumns)
-        mGridListAdapter = GridListRecyclerAdapter(applicationContext, resultsDiscoverMovies.results)
+        mGridListAdapter = GridListRecyclerAdapter(this@MainActivity, resultsDiscoverMovies.results)
         mGridListAdapter!!.setClickListener(this)
 
         recyclerView.adapter = mGridListAdapter
@@ -61,6 +62,8 @@ class MainActivity : AppCompatActivity(), GridListRecyclerAdapter.ItemClickListe
         Log.d("Movie Selected", m.title)
         var intent = Intent(applicationContext, MovieDetailsActivity::class.java)
         intent.putExtra(MovieDetailsActivity.EXTRA_MOVIE_ID, m.id)
-        startActivity(intent)
+
+        var activityOptionsCompat : ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity)
+        startActivity(intent, activityOptionsCompat.toBundle())
     }
 }

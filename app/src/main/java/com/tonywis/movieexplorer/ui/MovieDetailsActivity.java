@@ -7,13 +7,13 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tonywis.movieexplorer.BuildConfig;
@@ -76,7 +76,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     refreshView(movie.movieDetails);
                 }
             }
-            APIHelper.getMovieDetails(getApplicationContext(), true, id, new TaskComplete<MovieDetails>() {
+            APIHelper.getMovieDetails(getApplicationContext(), id, new TaskComplete<MovieDetails>() {
                 @Override
                 public void run() {
                     final MovieDetails movieDetails = this.getResult();
@@ -121,6 +121,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        supportFinishAfterTransition();
+        return true;
+    }
+
     private void setShareMovieIntent() {
         if (mShareActionProvider != null) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -136,10 +142,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if (movie != null) {
             findViewById(R.id.movie_details_error_message).setVisibility(View.GONE);
             AppCompatImageView backdrop = findViewById(R.id.movie_details_backdrop);
-            TextView title = findViewById(R.id.movie_details_title);
-            TextView releaseDate = findViewById(R.id.movie_details_release_date);
-            TextView genres = findViewById(R.id.movie_details_genres);
-            TextView synopsis = findViewById(R.id.movie_details_synopsis);
+            AppCompatTextView title = findViewById(R.id.movie_details_title);
+            AppCompatTextView releaseDate = findViewById(R.id.movie_details_release_date);
+            AppCompatTextView genres = findViewById(R.id.movie_details_genres);
+            AppCompatTextView synopsis = findViewById(R.id.movie_details_synopsis);
             FloatingActionButton voteAverage = findViewById(R.id.movie_details_fab_vote_average);
 
             toolbar.setTitle(movie.title);

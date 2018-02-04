@@ -21,7 +21,7 @@
             app:expandedTitleTextAppearance="@android:color/transparent"
             android:fitsSystemWindows="true">
 
-            <android.support.v7.widget.AppCompatImageView
+        <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/movie_details_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -57,25 +57,25 @@
                 android:paddingLeft="16dp"
                 android:paddingBottom="24dp">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/movie_details_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:textColor="@android:color/black"/>
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/movie_details_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:paddingTop="12dp"/>
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/movie_details_release_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:paddingTop="12dp"/>
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/movie_details_synopsis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/movie_details_error_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

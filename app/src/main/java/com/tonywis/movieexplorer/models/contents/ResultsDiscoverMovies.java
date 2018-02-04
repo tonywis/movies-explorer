@@ -1,5 +1,7 @@
 package com.tonywis.movieexplorer.models.contents;
 
+import android.util.Log;
+
 import com.google.gson.reflect.TypeToken;
 import com.tonywis.movieexplorer.models.contents.lists.Movie;
 
@@ -17,7 +19,7 @@ public class ResultsDiscoverMovies {
         Movie movie = null;
 
         int i = 0;
-        while (i < results.size() && (results.get(i).movieDetails != null && results.get(i).movieDetails.id != id)) {
+        while (i < results.size() && (results.get(i).id != id)) {
             i++;
         }
 

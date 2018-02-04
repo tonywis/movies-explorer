@@ -29,11 +29,10 @@ public class APIHelper {
         apiRequest.execute(url);
     }
 
-    public static void getMovieDetails(Context c, boolean showMissingInternetConnexion, int id, TaskComplete<MovieDetails> taskcomplete) {
+    public static void getMovieDetails(Context c, int id, TaskComplete<MovieDetails> taskcomplete) {
         APIRequest<MovieDetails> apiRequest = new APIRequest<>(c, MovieDetails.typeAnswerOf(), taskcomplete);
         String url = BuildConfig.URL_TMDB_API+"/movie/"+id+"?api_key="+BuildConfig.API_KEY_TMDB+"&language="+ Utility.getFullCodeLanguage();
         apiRequest.setMethod(Request.Method.GET);
-        apiRequest.setShowMissingInternetConnexion(showMissingInternetConnexion);
         apiRequest.execute(url);
     }
 
