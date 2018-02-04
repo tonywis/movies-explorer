@@ -20,6 +20,7 @@ android {
         buildConfigField "String", "API_KEY_TMDB", apisKeysProperties['apiTMDB']
         buildConfigField "String", "URL_TMDB_API", "\"https://api.themoviedb.org/3\""
         buildConfigField "String", "URL_TMDB_IMAGES", "\"https://image.tmdb.org/t/p/w500\""
+        buildConfigField "String", "URL_TMDB_WEBSITE", "\"https://www.themoviedb.org/movie/%s?language=%s\""
     }
     buildTypes {
         release {

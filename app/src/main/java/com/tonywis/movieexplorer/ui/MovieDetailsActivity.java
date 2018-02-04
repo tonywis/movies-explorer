@@ -3,12 +3,15 @@ package com.tonywis.movieexplorer.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,7 +32,6 @@ import com.tonywis.movieexplorer.utils.requests.TaskComplete;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -38,6 +40,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Movie movie = null;
     private ResultsDiscoverMovies resultsDiscoverMovies;
+    private ShareActionProvider mShareActionProvider;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mLoadingMovieDetails.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra(EXTRA_MOVIE_ID, -1);
+        id = intent.getIntExtra(EXTRA_MOVIE_ID, -1);
 
         toolbar = findViewById(R.id.movie_details_toolbar);
         toolbar.setTitle("");
@@ -87,7 +91,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                                 if (resultsReleaseDates != null) {
                                     List<ReleaseDatesGlobal> listReleaseDatesGlobal = resultsReleaseDates.results;
                                     for (ReleaseDatesGlobal releaseDatesGlobal : listReleaseDatesGlobal) {
-                                        if (releaseDatesGlobal.iso_3166_1.equalsIgnoreCase(Locale.getDefault().getCountry())) {
+                                        if (releaseDatesGlobal.iso_3166_1.equalsIgnoreCase(Utility.getBasicCodeLanguage())) {
                                             movieDetails.release_date = releaseDatesGlobal.release_dates.get(0).release_date;
                                             Preference.setDiscoverMovies(getApplicationContext(), resultsDiscoverMovies);
                                         }
@@ -106,6 +110,25 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
         else
             refreshView(null);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_movie_details, menu);
+        MenuItem item = menu.findItem(R.id.menu_movie_details_item_share);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareMovieIntent();
+        return true;
+    }
+
+    private void setShareMovieIntent() {
+        if (mShareActionProvider != null) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    String.format(BuildConfig.URL_TMDB_WEBSITE, id, Utility.getFullCodeLanguage()));
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     public void refreshView(MovieDetails movie) {

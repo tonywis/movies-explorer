@@ -38,7 +38,11 @@ public class Utility {
         return image;
     }
 
-    public static String getCodeLanguage() {
+    public static String getFullCodeLanguage() {
         return Locale.getDefault().toString().replace("_","-");
+    }
+
+    public static String getBasicCodeLanguage() {
+        return Locale.getDefault().getCountry();
     }
 }
