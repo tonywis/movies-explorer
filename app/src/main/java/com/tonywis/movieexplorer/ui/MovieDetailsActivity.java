@@ -59,8 +59,18 @@ public class MovieDetailsActivity extends AppCompatActivity {
             resultsDiscoverMovies = Preference.getDiscoverMovies(getApplicationContext());
             if (resultsDiscoverMovies != null) {
                 movie = resultsDiscoverMovies.getMovieById(id);
-                if (movie != null)
+                if (movie != null) {
+                    // Temp
+                    if (movie.movieDetails == null) {
+                        movie.movieDetails = new MovieDetails();
+                        movie.movieDetails.id = movie.id;
+                        movie.movieDetails.title = movie.title;
+                        movie.movieDetails.overview = movie.overview;
+                        movie.movieDetails.vote_average = movie.vote_average;
+                        Preference.setDiscoverMovies(getApplicationContext(), resultsDiscoverMovies);
+                    }
                     refreshView(movie.movieDetails);
+                }
             }
             APIHelper.getMovieDetails(getApplicationContext(), true, id, new TaskComplete<MovieDetails>() {
                 @Override
@@ -77,7 +87,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                                 if (resultsReleaseDates != null) {
                                     List<ReleaseDatesGlobal> listReleaseDatesGlobal = resultsReleaseDates.results;
                                     for (ReleaseDatesGlobal releaseDatesGlobal : listReleaseDatesGlobal) {
-                                        if (releaseDatesGlobal.iso_3166_1.compareTo(Locale.getDefault().getCountry()) == 0) {
+                                        if (releaseDatesGlobal.iso_3166_1.equalsIgnoreCase(Locale.getDefault().getCountry())) {
                                             movieDetails.release_date = releaseDatesGlobal.release_dates.get(0).release_date;
                                             Preference.setDiscoverMovies(getApplicationContext(), resultsDiscoverMovies);
                                         }
@@ -102,28 +112,31 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mLoadingMovieDetails.setVisibility(View.GONE);
         if (movie != null) {
             findViewById(R.id.movie_details_error_message).setVisibility(View.GONE);
-            toolbar.setTitle(movie.title);
             AppCompatImageView backdrop = findViewById(R.id.movie_details_backdrop);
             TextView title = findViewById(R.id.movie_details_title);
             TextView releaseDate = findViewById(R.id.movie_details_release_date);
             TextView genres = findViewById(R.id.movie_details_genres);
             TextView synopsis = findViewById(R.id.movie_details_synopsis);
             FloatingActionButton voteAverage = findViewById(R.id.movie_details_fab_vote_average);
-            voteAverage.setImageBitmap(Utility.textAsBitmap(String.valueOf(movie.vote_average), Color.WHITE));
 
+            toolbar.setTitle(movie.title);
+            title.setText(movie.title);
+            voteAverage.setImageBitmap(Utility.textAsBitmap(String.valueOf(movie.vote_average), Color.WHITE));
+            synopsis.setText(movie.overview);
             Picasso.with(getApplicationContext())
                     .load(BuildConfig.URL_TMDB_IMAGES + movie.backdrop_path)
                     .error(R.drawable.ic_placeholder)
                     .into(backdrop);
-            title.setText(movie.title);
-            StringBuilder strGenre = new StringBuilder();
-            for (Genre g : movie.genres) {
-                if (strGenre.length() > 0)
-                    strGenre.append(", ");
-                strGenre.append(g.name);
+
+            if (movie.genres != null) {
+                StringBuilder strGenre = new StringBuilder();
+                for (Genre g : movie.genres) {
+                    if (strGenre.length() > 0)
+                        strGenre.append(", ");
+                    strGenre.append(g.name);
+                }
+                genres.setText(strGenre);
             }
-            genres.setText(strGenre);
-            synopsis.setText(movie.overview);
 
             releaseDate.setText("");
             if (movie.release_date != null) {
