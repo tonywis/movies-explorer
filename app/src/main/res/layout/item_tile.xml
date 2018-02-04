@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="272dp"
-    android:layout_margin="0.5dp"
+    android:layout_margin="@dimen/spacing_items"
     android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
@@ -32,7 +32,7 @@
                 android:maxLines="2"
                 android:padding="8dp"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="@dimen/title_size_tile" />
         </RelativeLayout>
 
     </RelativeLayout>
