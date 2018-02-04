@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -102,7 +103,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if (movie != null) {
             findViewById(R.id.movie_details_error_message).setVisibility(View.GONE);
             toolbar.setTitle(movie.title);
-            ImageView backdrop = findViewById(R.id.movie_details_backdrop);
+            AppCompatImageView backdrop = findViewById(R.id.movie_details_backdrop);
             TextView title = findViewById(R.id.movie_details_title);
             TextView releaseDate = findViewById(R.id.movie_details_release_date);
             TextView genres = findViewById(R.id.movie_details_genres);

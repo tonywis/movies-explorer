@@ -20,8 +20,8 @@
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleTextAppearance="@android:color/transparent"
             android:fitsSystemWindows="true">
-            
-            <ImageView
+
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/movie_details_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
