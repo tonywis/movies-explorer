@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movie Explorer</string>
+    <string name="app_name" translatable="false">Movie Explorer</string>
     <string name="not_connect">Internet connexion missing.</string>
     <string name="no_datas">No datas.</string>
     <string name="share">Share</string>

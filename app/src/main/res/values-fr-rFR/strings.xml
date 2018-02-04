@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="not_connect">Connexion internet manquante.</string>
+    <string name="no_datas">Aucune données.</string>
+    <string name="share">Partager</string>
+</resources>
