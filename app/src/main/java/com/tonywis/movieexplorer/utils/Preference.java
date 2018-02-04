@@ -14,20 +14,42 @@ import com.tonywis.movieexplorer.models.contents.ResultsDiscoverMovies;
 public class Preference {
     public static final String KEY_DISCOVER_MOVIES = "DISCOVER_MOVIES";
 
+    /**
+     *
+     * @param c
+     * @return SharedPreferences
+     */
     private static SharedPreferences get(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c);
     }
 
-    private static String getPref(Context c, String key) {
-        return get(c).getString(key, null);
+    /**
+     *
+     * @param context
+     * @param key
+     * @return String datas
+     */
+    private static String getPref(Context context, String key) {
+        return get(context).getString(key, null);
     }
 
-    private static void setPref(Context c, String key, String value) {
-        get(c).edit().putString(key, value).apply();
+    /**
+     *
+     * @param context
+     * @param key
+     * @param value
+     */
+    private static void setPref(Context context, String key, String value) {
+        get(context).edit().putString(key, value).apply();
     }
 
-    public static ResultsDiscoverMovies getDiscoverMovies(Context c) {
-        String acc = getPref(c, Preference.KEY_DISCOVER_MOVIES);
+    /**
+     *
+     * @param context
+     * @return ResultsDiscoverMovies
+     */
+    public static ResultsDiscoverMovies getDiscoverMovies(Context context) {
+        String acc = getPref(context, Preference.KEY_DISCOVER_MOVIES);
         ResultsDiscoverMovies discoverMovies = null;
         if (acc != null) {
             Gson gson = new Gson();
@@ -36,11 +58,16 @@ public class Preference {
         return discoverMovies;
     }
 
-    public static void setDiscoverMovies(Context c, ResultsDiscoverMovies discoverMovies) {
+    /**
+     *
+     * @param context
+     * @param discoverMovies
+     */
+    public static void setDiscoverMovies(Context context, ResultsDiscoverMovies discoverMovies) {
         if (discoverMovies != null)
-            setPref(c, KEY_DISCOVER_MOVIES, new Gson().toJson(discoverMovies));
+            setPref(context, KEY_DISCOVER_MOVIES, new Gson().toJson(discoverMovies));
         else
-            setPref(c, KEY_DISCOVER_MOVIES, null);
+            setPref(context, KEY_DISCOVER_MOVIES, null);
 
     }
 

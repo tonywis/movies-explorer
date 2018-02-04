@@ -1,9 +1,9 @@
 package com.tonywis.movieexplorer.ui
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,11 +11,11 @@ import android.view.View
 import com.tonywis.movieexplorer.R
 import com.tonywis.movieexplorer.models.contents.ResultsDiscoverMovies
 import com.tonywis.movieexplorer.models.contents.lists.Movie
+import com.tonywis.movieexplorer.ui.adapters.GridListRecyclerAdapter
+import com.tonywis.movieexplorer.utils.Preference
 import com.tonywis.movieexplorer.utils.Utility
 import com.tonywis.movieexplorer.utils.requests.APIHelper
 import com.tonywis.movieexplorer.utils.requests.TaskComplete
-import com.tonywis.movieexplorer.ui.adapters.GridListRecyclerAdapter
-import com.tonywis.movieexplorer.utils.Preference
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity(), GridListRecyclerAdapter.ItemClickListe
         })
     }
 
+    /**
+     * @param resultsDiscoverMovies
+     */
     fun generateRecyclerView(resultsDiscoverMovies: ResultsDiscoverMovies) {
         main_loading.visibility = View.GONE
         var recyclerView : RecyclerView = findViewById(R.id.recycler_view)
@@ -57,6 +60,11 @@ class MainActivity : AppCompatActivity(), GridListRecyclerAdapter.ItemClickListe
         recyclerView.adapter = mGridListAdapter
     }
 
+    /**
+     *
+     * @param view
+     * @param position
+     */
     override fun onItemClick(view: View?, position: Int) {
         var m : Movie = mGridListAdapter!!.getItem(position)
         Log.d("Movie Selected", m.title)

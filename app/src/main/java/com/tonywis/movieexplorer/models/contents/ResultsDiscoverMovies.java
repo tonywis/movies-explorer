@@ -1,7 +1,5 @@
 package com.tonywis.movieexplorer.models.contents;
 
-import android.util.Log;
-
 import com.google.gson.reflect.TypeToken;
 import com.tonywis.movieexplorer.models.contents.lists.Movie;
 
@@ -15,6 +13,11 @@ import java.util.List;
 public class ResultsDiscoverMovies {
     public List<Movie> results;
 
+    /**
+     *
+     * @param id
+     * @return Movie
+     */
     public Movie getMovieById(int id) {
         Movie movie = null;
 
@@ -29,6 +32,10 @@ public class ResultsDiscoverMovies {
         return movie;
     }
 
+    /**
+     *
+     * @return Type
+     */
     public static Type typeAnswerOf() {
         return new TypeToken<ResultsDiscoverMovies>() {
         }.getType();

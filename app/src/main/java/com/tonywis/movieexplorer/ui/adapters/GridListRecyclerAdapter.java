@@ -1,6 +1,5 @@
 package com.tonywis.movieexplorer.ui.adapters;
 
-import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.tonywis.movieexplorer.BuildConfig;
 import com.tonywis.movieexplorer.R;
@@ -45,6 +43,11 @@ public class GridListRecyclerAdapter extends RecyclerView.Adapter<GridListRecycl
         }
     }
 
+    /**
+     *
+     * @param mainActivity
+     * @param datas
+     */
     public GridListRecyclerAdapter(MainActivity mainActivity, List<Movie> datas) {
         mMainActivity = mainActivity;
         mDatas = datas;
@@ -74,10 +77,19 @@ public class GridListRecyclerAdapter extends RecyclerView.Adapter<GridListRecycl
         return mDatas.size();
     }
 
+    /**
+     *
+     * @param position
+     * @return Movie
+     */
     public Movie getItem(int position) {
         return mDatas.get(position);
     }
 
+    /**
+     *
+     * @param itemClickListener
+     */
     public void setClickListener(ItemClickListener itemClickListener) {
         mClickListener = itemClickListener;
     }

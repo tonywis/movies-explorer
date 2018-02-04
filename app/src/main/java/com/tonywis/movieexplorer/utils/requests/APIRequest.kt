@@ -7,7 +7,6 @@ package com.tonywis.movieexplorer.utils.requests
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-
 import com.android.volley.Response
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.HttpHeaderParser
@@ -16,11 +15,10 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.tonywis.movieexplorer.BuildConfig
 import com.tonywis.movieexplorer.R
-
 import java.io.UnsupportedEncodingException
 import java.lang.reflect.Type
 import java.nio.charset.Charset
-import java.util.HashMap
+import java.util.*
 
 
 class APIRequest<TypeData>(private val context: Context, private val resultClass: Type, private val taskComplete: TaskComplete<TypeData>?) {

@@ -14,6 +14,10 @@ public class ResultsReleaseDates {
     public int id;
     public List<ReleaseDatesGlobal> results;
 
+    /**
+     *
+     * @return Type
+     */
     public static Type typeAnswerOf() {
         return new TypeToken<ResultsReleaseDates>() {
         }.getType();

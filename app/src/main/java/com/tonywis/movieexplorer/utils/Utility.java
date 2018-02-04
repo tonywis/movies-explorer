@@ -5,9 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
@@ -17,12 +15,23 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
  */
 
 public class Utility {
+    /**
+     *
+     * @param context
+     * @return int Nb Columns optimized for user
+     */
     public static int calculateNoOfColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         return (int) (dpWidth / 180);
     }
 
+    /**
+     *
+     * @param text
+     * @param textColor
+     * @return Bitmap
+     */
     public static Bitmap textAsBitmap(String text, int textColor) {
         Paint paint = new Paint(ANTI_ALIAS_FLAG);
         paint.setTextSize((float) 40);
@@ -38,10 +47,18 @@ public class Utility {
         return image;
     }
 
+    /**
+     *
+     * @return String Language format exemple fr-FR or en-US
+     */
     public static String getFullCodeLanguage() {
         return Locale.getDefault().toString().replace("_","-");
     }
 
+    /**
+     *
+     * @return String Language simple format exemple FR or US
+     */
     public static String getBasicCodeLanguage() {
         return Locale.getDefault().getCountry();
     }

@@ -2,7 +2,6 @@ package com.tonywis.movieexplorer.models.contents;
 
 import com.google.gson.reflect.TypeToken;
 import com.tonywis.movieexplorer.models.contents.lists.Genre;
-import com.tonywis.movieexplorer.models.contents.lists.ReleaseDate;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -22,6 +21,10 @@ public class MovieDetails {
 
     public String release_date;
 
+    /**
+     *
+     * @return Type
+     */
     public static Type typeAnswerOf() {
         return new TypeToken<MovieDetails>() {
         }.getType();

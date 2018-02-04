@@ -2,10 +2,10 @@ package com.tonywis.movieexplorer.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ShareActionProvider;
@@ -19,8 +19,8 @@ import com.squareup.picasso.Picasso;
 import com.tonywis.movieexplorer.BuildConfig;
 import com.tonywis.movieexplorer.R;
 import com.tonywis.movieexplorer.models.contents.MovieDetails;
-import com.tonywis.movieexplorer.models.contents.ResultsReleaseDates;
 import com.tonywis.movieexplorer.models.contents.ResultsDiscoverMovies;
+import com.tonywis.movieexplorer.models.contents.ResultsReleaseDates;
 import com.tonywis.movieexplorer.models.contents.lists.Genre;
 import com.tonywis.movieexplorer.models.contents.lists.Movie;
 import com.tonywis.movieexplorer.models.contents.lists.ReleaseDatesGlobal;
@@ -60,6 +60,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (id > -1) {
+            // Try display temp datas
             resultsDiscoverMovies = Preference.getDiscoverMovies(getApplicationContext());
             if (resultsDiscoverMovies != null) {
                 movie = resultsDiscoverMovies.getMovieById(id);
@@ -76,6 +77,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     refreshView(movie.movieDetails);
                 }
             }
+            // get real datas
             APIHelper.getMovieDetails(getApplicationContext(), id, new TaskComplete<MovieDetails>() {
                 @Override
                 public void run() {
@@ -127,6 +129,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         return true;
     }
 
+
     private void setShareMovieIntent() {
         if (mShareActionProvider != null) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -137,6 +140,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param movie
+     */
     public void refreshView(MovieDetails movie) {
         mLoadingMovieDetails.setVisibility(View.GONE);
         if (movie != null) {
